@@ -1,0 +1,28 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: test
+        run: npm test
+      - name: lint
+        if: ${{ always() }}
+        run: npm run lint
+      - name: build
+        if: ${{ always() }}
+        run: npm run build
