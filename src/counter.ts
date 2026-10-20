@@ -1,3 +1,3 @@
 export function increment(value: number): number {
-  return value;
+  return value + 1;
 }
